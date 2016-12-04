@@ -1,0 +1,17 @@
+/wheels
+/cache
+
+/packages/custodia.ipa/dist/
+/packages/custodia.ipa/build/
+
+/packages/ipacommands/build/
+/packages/ipacommands/dist/
+/packages/ipacommands/ipasetup.py
+/packages/ipacommands/config.h
+/packages/ipacommands/Contributors.txt
+/packages/ipacommands/COPYING
+/packages/ipacommands/COPYING.openssl
+
+*.pyc
+__pycache__
+*.egg-info

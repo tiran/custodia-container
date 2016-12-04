@@ -1,0 +1,30 @@
+FROM custodia-yakkety-base
+MAINTAINER Christian Heimes <cheimes@redhat.com>
+
+# install base dependencies
+RUN apt-get update \
+    && apt-get install -yy \
+        -o APT::Install-Recommends=false -o APT::Install-Suggests=false \
+         gcc pkg-config autoconf automake autopoint libtool make git \
+         systemd gettext \
+         python-dev libkrb5-dev libkrad-dev libffi-dev libnss3-dev \
+         libldap2-dev libsasl2-dev libssl-dev libpopt-dev libini-config-dev \
+         libxmlrpc-core-c3-dev libgettextpo-dev libsvrcore-dev \
+         389-ds-base-dev samba-dev libtalloc-dev libtevent-dev \
+         uuid-dev libsss-idmap-dev libsss-nss-idmap-dev \
+         libverto-dev libunistring-dev \
+    && apt-get clean
+
+VOLUME ["/buildroot", "/cache", "/wheels"]
+
+ENV PIP_WHEEL_DIR=/wheels/yakkety
+ENV PIP_FIND_LINKS=/wheels/yakkety
+ENV PIP_CACHE_DIR=/cache
+
+# hack
+ENV SSSNSSIDMAP_CFLAGS="-I/usr/include"
+ENV SSSNSSIDMAP_LIBS="-lsss_nss_idmap"
+ENV XMLRPC_CFLAGS="-I/usr/include/libxml2"
+ENV XMLRPC_LIBS="-lxmlrpc_client"
+
+RUN /venv/bin/pip install wheel
