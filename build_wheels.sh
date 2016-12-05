@@ -17,7 +17,10 @@ ${VENV}/bin/pip wheel ${PACKAGES}/custodia
 # ipalib, ipaclient; depends on custodia
 pushd ${PACKAGES}/freeipa
 rm -f configure Makefile config.status
-./autogen.sh --silent --without-pylint --without-jslint --with-ipaplatform=base
+if [ ! -e configure ]; then
+    autoreconf -if
+fi
+./configure --silent --without-pylint --without-jslint --with-ipaplatform=base
 make clean bdist_wheel PYTHON=${VENV}/bin/python
 ${VENV}/bin/pip wheel dist/wheels/ipa*.whl
 popd
