@@ -3,6 +3,9 @@ sudo: required
 
 language: python
 
+services:
+  - docker
+
 compiler:
   - clang
   - gcc
@@ -14,7 +17,6 @@ env:
 before_install:
   - docker info
   - git submodule update --init --recursive
-
 
 script:
   - make baseimage DISTRO=$DISTRO

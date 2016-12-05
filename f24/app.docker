@@ -21,9 +21,11 @@ RUN chown custodia:custodia /etc/custodia/*.conf \
     && chmod 644 /etc/custodia/*.conf
 
 
+ADD wheels/f24 /wheels/f24
 RUN /venv/bin/pip install --disable-pip-version-check --no-cache-dir \
     --no-index --find-links /wheels/f24 --pre  \
     custodia custodia.ipa ipalib ipaclient ipacommands
+RUN rm -rf /wheels/f24/*
 
 USER ${CUSTODIA_UID:-447}
 

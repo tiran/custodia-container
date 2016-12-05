@@ -21,9 +21,11 @@ RUN chown custodia:custodia /etc/custodia/*.conf \
     && chmod 644 /etc/custodia/*.conf
 
 
+ADD wheels/yakkety /wheels/yakkety
 RUN /venv/bin/pip install --disable-pip-version-check --no-cache-dir \
     --no-index --find-links /wheels/yakkety --pre  \
     custodia custodia.ipa ipalib ipaclient ipacommands
+RUN rm -rf /wheels/yakkety/*
 
 USER ${CUSTODIA_UID:-447}
 

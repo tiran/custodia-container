@@ -38,9 +38,7 @@ wheels:
 app: wheels
 	@ls $(CURDIR)/wheels/$(DISTRO)/ipalib*.whl >/dev/null 2>&1 || $(MAKE) wheels
 	$(DOCKER_CMD) build \
-	    --rm=false \
 	    -f $(DISTRO)/app.docker \
-	    -v "$(CURDIR)/wheels:/wheels:Z,ro" \
 	    -t $(PREFIX)-$(DISTRO)-app .
 
 .PHONY: dockerrun
