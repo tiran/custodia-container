@@ -1,0 +1,22 @@
+dist: xenial
+sudo: required
+
+language: python
+
+compiler:
+  - clang
+  - gcc
+
+env:
+  - DISTRO=f24
+  - DISTRO=yakkety
+
+before_install:
+  - docker info
+  - git submodule update --init --recursive
+
+
+script:
+  - make baseimage DISTRO=$DISTRO
+  - make buildimage DISTRO=$DISTRO
+  - make app DISTRO=$DISTRO
