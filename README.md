@@ -1,7 +1,10 @@
 # Custodia container builder
 
+[![Build Status](https://travis-ci.org/tiran/custodia-container.svg?branch=master)](https://travis-ci.org/tiran/custodia-container)
+
 Christian Heimes <cheimes@redhat.com>
 
+https://github.com/latchset/custodia/
 
 ## Images / containers
 
