@@ -32,7 +32,7 @@ wheels:
 	    -v "$(CURDIR)/wheels:/wheels:Z" \
 	    -v "$(CURDIR)/cache:/cache:Z" \
 	    $(PREFIX)-$(DISTRO)-build \
-	    /buildroot/build.sh
+	    /buildroot/build_wheels.sh
 
 .PHONY: app
 app: wheels
