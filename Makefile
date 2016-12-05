@@ -23,7 +23,6 @@ buildimage: baseimage
 wheels:
 	$(DOCKER_CMD) images | grep -q $(PREFIX)-$(DISTRO)-build || $(MAKE) buildimage
 	mkdir -p $(CURDIR)/wheels/$(DISTRO) $(CURDIR)/cache
-	rm -f $(CURDIR)/wheels/$(DISTRO)/*.whl
 	$(DOCKER_CMD) rm $(PREFIX)-$(DISTRO)-builder >/dev/null 2>&1 || true
 	$(DOCKER_CMD) run \
 	    --name $(PREFIX)-$(DISTRO)-builder \
@@ -52,7 +51,7 @@ dockerrun:
 
 .PHONY: clean
 clean:
-	rm -rf $(CURDIR)/wheels $(CURDIR)/cache
+	rm -rf $(CURDIR)/wheels
 	rm -f $(CURDIR)/packages/ipacommands/ipasetup.py \
 	    $(CURDIR)/packages/ipacommands/config.h \
 	    $(CURDIR)/packages/ipacommands/Contributors.txt \
@@ -65,3 +64,15 @@ clean:
 	rm -rf $(CURDIR)/packages/freeipa/ipa*/build
 	rm -rf $(CURDIR)/packages/freeipa/ipa*/dist
 	rm -f $(CURDIR)/packages/freeipa/config.h.in~
+
+.PHONY: cleandocker
+cleandocker:
+	$(DOCKER_CMD) rm $(PREFIX)-$(DISTRO) || true
+	$(DOCKER_CMD) rm $(PREFIX)-$(DISTRO)-builder || true
+	$(DOCKER_CMD) rmi $(PREFIX)-$(DISTRO)-app || true
+	$(DOCKER_CMD) rmi $(PREFIX)-$(DISTRO)-build || true
+	$(DOCKER_CMD) rmi $(PREFIX)-$(DISTRO)-base || true
+
+.PHONY: realclean
+realclean: clean cleandocker
+	rm -rf $(CURDIR)/cache
