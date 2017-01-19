@@ -12,6 +12,7 @@ compiler:
 
 env:
   - DISTRO=f24
+  - DISTRO=f25
   - DISTRO=yakkety
 
 before_install:
