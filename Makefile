@@ -1,6 +1,6 @@
 PREFIX = custodia
 DOCKER_CMD = docker
-DISTRO = f24
+DISTRO = f25
 
 .NOTPARALLEL:
 
@@ -76,3 +76,4 @@ cleandocker:
 .PHONY: realclean
 realclean: clean cleandocker
 	rm -rf $(CURDIR)/cache
+

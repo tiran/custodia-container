@@ -1,0 +1,15 @@
+FROM fedora:25
+MAINTAINER Christian Heimes <cheimes@redhat.com>
+
+RUN dnf -y update && dnf clean all
+
+# install base dependencies
+RUN dnf -y install \
+        python2 python-pip python-virtualenv \
+        krb5-workstation openssl openldap-clients nss-tools libffi \
+        popt cyrus-sasl-lib libini_config \
+    && dnf clean all
+
+RUN virtualenv -p /usr/bin/python2.7 /venv
+RUN /venv/bin/pip install --upgrade setuptools
+RUN /venv/bin/pip install --upgrade pip
