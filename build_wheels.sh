@@ -20,7 +20,7 @@ rm -f configure Makefile config.status
 if [ ! -e configure ]; then
     autoreconf -if
 fi
-./configure --silent --without-pylint --without-jslint --with-ipaplatform=base
+./configure --silent --disable-pylint --without-jslint --with-ipaplatform=base
 make clean bdist_wheel PYTHON=${VENV}/bin/python
 ${VENV}/bin/pip wheel dist/wheels/ipa*.whl
 popd
