@@ -7,10 +7,7 @@ RUN dnf -y install \
          git xz \
          krb5-devel openssl-devel openldap-devel nss-devel libffi-devel \
          popt-devel cyrus-sasl-devel libini_config-devel \
-         python-devel xmlrpc-c-devel gettext-devel svrcore-devel \
-         389-ds-base-devel samba-devel libtalloc-devel libtevent-devel \
-         libuuid-devel libsss_idmap-devel libsss_nss_idmap-devel \
-         libverto-devel libunistring-devel \
+         python-devel xmlrpc-c-devel gettext-devel \
     && dnf clean all
 
 VOLUME ["/buildroot", "/cache", "/wheels"]

@@ -1,7 +1,7 @@
 FROM fedora:24
 MAINTAINER Christian Heimes <cheimes@redhat.com>
 
-RUN dnf -y update && dnf clean all
+RUN dnf -y update --best --allowerasing && dnf clean all
 
 # install base dependencies
 RUN dnf -y install \
