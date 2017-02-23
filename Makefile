@@ -2,6 +2,8 @@ PREFIX = custodia
 DOCKER_CMD = docker
 DISTRO = f25
 
+VOL_SUFFIX=$(shell getenforce >/dev/null 2>&1 && echo ':Z' || echo '')
+
 .NOTPARALLEL:
 
 all: wheels app
@@ -48,6 +50,16 @@ dockerrun:
 	    --name $(PREFIX)-$(DISTRO) \
 	    -e CREDS_UID=$(shell id -u) -e CREDS_GID=$(shell id -g) \
 	    $(PREFIX)-$(DISTRO)-app:latest
+
+.PHONY: dockertest
+dockertest:
+	@$(DOCKER_CMD) images | grep -q $(PREFIX)-$(DISTRO)-app || $(MAKE) app
+	@$(DOCKER_CMD) rm $(PREFIX)-$(DISTRO) >/dev/null 2>&1|| true
+	$(DOCKER_CMD) run \
+	    --name $(PREFIX)-$(DISTRO) \
+	    -v $(CURDIR)/tests.sh:/tmp/tests.sh$(VOL_SUFFIX) \
+	    $(PREFIX)-$(DISTRO)-app:latest \
+	    sh /tmp/tests.sh
 
 .PHONY: clean
 clean:

@@ -20,9 +20,10 @@ before_install:
   - git submodule update --init --recursive
   # in daily cron builds, update all submodules to latest revision
   - if test $TRAVIS_EVENT_TYPE = "cron"; then git submodule update --recursive --remote; fi
-  - git submodules
+  - git submodule
 
 script:
   - make baseimage DISTRO=$DISTRO
   - make buildimage DISTRO=$DISTRO
   - make app DISTRO=$DISTRO
+  - make dockertest DISTRO=$DISTRO
