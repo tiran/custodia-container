@@ -6,10 +6,6 @@ VENV=/venv
 
 . ${VENV}/bin/activate
 
-# upstream python-nss has a build bug
-rm -rf ${PACKAGES}/python-nss/build ${PACKAGES}/python-nss/dist
-${VENV}/bin/pip wheel ${PACKAGES}/python-nss
-
 # custodia
 rm -rf ${PACKAGES}/custodia/build ${PACKAGES}/custodia/dist
 ${VENV}/bin/pip wheel ${PACKAGES}/custodia

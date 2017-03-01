@@ -71,7 +71,6 @@ clean:
 	    $(CURDIR)/packages/ipacommands/COPYING.openssl
 	find $(CURDIR)/packages/custodia \
 	     $(CURDIR)/packages/ipacommands \
-	     $(CURDIR)/packages/python-nss \
 	    -type d -and \( -name 'build' -or -name 'dist' \) | xargs rm -rf
 	rm -rf $(CURDIR)/packages/freeipa/ipa*/build
 	rm -rf $(CURDIR)/packages/freeipa/ipa*/dist

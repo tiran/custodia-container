@@ -4,10 +4,6 @@
 [submodule "packages/freeipa"]
 	path = packages/freeipa
 	url = https://github.com/freeipa/freeipa.git
-[submodule "packages/python-nss"]
-	path = packages/python-nss
-	url = https://github.com/tiran/python-nss.git
-	branch = wheel
 [submodule "packages/custodia.ipa"]
 	path = packages/custodia.ipa
 	url = https://github.com/latchset/custodia.ipa.git
