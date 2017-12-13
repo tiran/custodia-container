@@ -1,0 +1,21 @@
+FROM custodia-f27-base
+LABEL \
+    name="custodia-f27-build" \
+    maintainer="Christian Heimes <cheimes@redhat.com>"
+
+# install base dependencies
+RUN dnf -y install \
+         gcc redhat-rpm-config pkgconfig make autoconf automake libtool \
+         git xz \
+         krb5-devel openssl-devel openldap-devel nss-devel libffi-devel \
+         popt-devel cyrus-sasl-devel libini_config-devel \
+         python-devel xmlrpc-c-devel gettext-devel \
+    && dnf clean all
+
+VOLUME ["/buildroot", "/cache", "/wheels"]
+
+ENV PIP_WHEEL_DIR=/wheels/f27
+ENV PIP_FIND_LINKS=/wheels/f27
+ENV PIP_CACHE_DIR=/cache
+
+RUN /venv/bin/pip install wheel

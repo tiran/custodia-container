@@ -1,6 +1,6 @@
 PREFIX = custodia
 DOCKER_CMD = docker
-DISTRO = f25
+DISTRO = f27
 
 VOL_SUFFIX=$(shell getenforce >/dev/null 2>&1 && echo ':Z' || echo '')
 
@@ -27,6 +27,7 @@ wheels:
 	mkdir -p $(CURDIR)/wheels/$(DISTRO) $(CURDIR)/cache
 	$(DOCKER_CMD) rm $(PREFIX)-$(DISTRO)-builder >/dev/null 2>&1 || true
 	$(DOCKER_CMD) run \
+	    --rm \
 	    --name $(PREFIX)-$(DISTRO)-builder \
 	    --user $(shell id -u):$(shell id -g) \
 	    -v "$(CURDIR):/buildroot:Z" \
@@ -56,6 +57,7 @@ dockertest:
 	@$(DOCKER_CMD) images | grep -q $(PREFIX)-$(DISTRO)-app || $(MAKE) app
 	@$(DOCKER_CMD) rm $(PREFIX)-$(DISTRO) >/dev/null 2>&1|| true
 	$(DOCKER_CMD) run \
+	    --rm \
 	    --name $(PREFIX)-$(DISTRO) \
 	    -v $(CURDIR)/tests.sh:/tmp/tests.sh$(VOL_SUFFIX) \
 	    $(PREFIX)-$(DISTRO)-app:latest \
