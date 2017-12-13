@@ -17,7 +17,6 @@ baseimage:
 .PHONY: buildimage
 buildimage: baseimage
 	$(DOCKER_CMD) build \
-	    --rm=false \
 	    -f $(DISTRO)/build.docker \
 	    -t $(PREFIX)-$(DISTRO)-build .
 
@@ -48,6 +47,7 @@ dockerrun:
 	@$(DOCKER_CMD) images | grep -q $(PREFIX)-$(DISTRO)-app || $(MAKE) app
 	@$(DOCKER_CMD) rm $(PREFIX)-$(DISTRO) >/dev/null 2>&1|| true
 	$(DOCKER_CMD) run \
+	    --rm \
 	    --name $(PREFIX)-$(DISTRO) \
 	    -e CREDS_UID=$(shell id -u) -e CREDS_GID=$(shell id -g) \
 	    $(PREFIX)-$(DISTRO)-app:latest
@@ -89,4 +89,3 @@ cleandocker:
 .PHONY: realclean
 realclean: clean cleandocker
 	rm -rf $(CURDIR)/cache
-
