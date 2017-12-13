@@ -1,5 +1,7 @@
 FROM custodia-yakkety-base
-MAINTAINER Christian Heimes <cheimes@redhat.com>
+LABEL \
+    name="custodia-yakkety-build" \
+    maintainer="Christian Heimes <cheimes@redhat.com>"
 
 # install base dependencies
 RUN apt-get update \

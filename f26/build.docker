@@ -1,5 +1,7 @@
 FROM custodia-f26-base
-MAINTAINER Christian Heimes <cheimes@redhat.com>
+LABEL \
+    name="custodia-f26-build" \
+    maintainer="Christian Heimes <cheimes@redhat.com>"
 
 # install base dependencies
 RUN dnf -y install \

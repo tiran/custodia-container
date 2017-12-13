@@ -1,5 +1,8 @@
 FROM registry.fedoraproject.org/fedora:26
-MAINTAINER Christian Heimes <cheimes@redhat.com>
+LABEL \
+    name="custodia-f26-base" \
+    maintainer="Christian Heimes <cheimes@redhat.com>"
+ENV LC_CTYPE="C.UTF-8"
 
 RUN dnf -y update --best --allowerasing && dnf clean all
 
