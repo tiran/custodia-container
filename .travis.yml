@@ -9,7 +9,6 @@ compiler:
   - gcc
 
 env:
-  - DISTRO=f26
   - DISTRO=f27
   - DISTRO=yakkety
 
