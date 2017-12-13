@@ -1,5 +1,8 @@
 FROM ubuntu:yakkety
-MAINTAINER Christian Heimes <cheimes@redhat.com>
+LABEL \
+    name="custodia-yakkety-base" \
+    maintainer="Christian Heimes <cheimes@redhat.com>"
+ENV LC_CTYPE="C.UTF-8"
 
 RUN apt-get update && apt-get upgrade -y && apt-get clean
 

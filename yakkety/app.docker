@@ -1,5 +1,7 @@
 FROM custodia-yakkety-base
-MAINTAINER Christian Heimes <cheimes@redhat.com>
+LABEL \
+    name="custodia-yakkety-app" \
+    maintainer="Christian Heimes <cheimes@redhat.com>"
 
 # Create Custodia user and group
 # sum(ord(c) for c in 'cust') == 447
